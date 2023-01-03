@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="WonderGirls">
+
+<resultMap id="WondergirlsResult">
+<result column="NUM" property="num" />
+<result column="NAME" property="name" />
+<result column="AGE" property="age" />
+</resultMap>
+
+<select id="getWondergirls" resultMap="WondergirlsResult">
+SELECT NUM, NAME, AGE
+FROM kin_kp..WONDERGIRLS
+ORDER BY NUM
+</select>
+
+<select id="selectWondergirl" parameterClass="Integer"
+resultClass="jyp.WonderGirls">
+SELECT NUM, NAME, AGE
+FROM kin_kp.WONDERGIRLS
+            inner join kin_kp..i_kp234
+    on
+      inner join kin_kp..i_kp232
+      inner join kin_kp..i_kp231
+    on a=b
+WHERE NUM = #num#
+</select>
+
+<insert id="insertWondergirl" parameterClass="jyp.WonderGirls">
+INSERT INTO
+kin_kp..WONDERGIRLS (NUM, NAME, AGE)
+VALUES (#num#, #name#, #age#)
+</insert>
+
+<update id="updateWondergirl" parameterClass="java.util.Map">
+UPDATE WONDERGIRLS SET
+NAME = #name#,
+AGE = #age#
+WHERE NUM = #num#
+</update>
+
+<delete id="deleteWondergirl" parameterClass="Integer">
+DELETE FROM WONDERGIRLS
+WHERE NUM = #num#
+</delete>
+
+</sqlMap>
